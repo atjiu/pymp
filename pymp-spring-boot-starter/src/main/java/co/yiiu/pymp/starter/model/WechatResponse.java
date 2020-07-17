@@ -6,5 +6,6 @@ import lombok.Data;
 public class WechatResponse {
 
     private String errmsg;
+    // 0表示成功
     private int errcode;
 }

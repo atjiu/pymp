@@ -49,6 +49,7 @@
     <script>
         function addAutoReply() {
             layer.open({
+                title: "添加自动回复",
                 type: 2,
                 area: ['500px', '300px'],
                 fixed: false, //不固定

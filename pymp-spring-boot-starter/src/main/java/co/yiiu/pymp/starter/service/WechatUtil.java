@@ -30,6 +30,7 @@ public class WechatUtil {
                 fetchToken();
             }
         }
+        log.info("当前的access_token: {}", threadLocal.get().getAccess_token());
         return threadLocal.get().getAccess_token();
     }
 

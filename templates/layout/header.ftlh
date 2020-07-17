@@ -16,23 +16,33 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="#">首页</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">公众号 <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/wechat/common/setting/sub_reply">关注回复</a></li>
-                            <li><a href="/wechat/msg_setting/auto_reply">自动回复</a></li>
-                            <li><a href="/wechat/tag/list">标签管理</a></li>
-                            <li><a href="/wechat/user/list">用户管理</a></li>
-                            <li><a href="/wechat/msg_setting/list">消息管理</a></li>
-                            <li><a href="#">菜单设置</a></li>
-                        </ul>
+                    <li <#if page_tab=="index">class="active"</#if>>
+                        <a href="/">首页</a>
+                    </li>
+                    <li <#if page_tab=="sub_reply">class="active"</#if>>
+                        <a href="/wechat/common/setting/sub_reply">关注回复</a>
+                    </li>
+                    <li <#if page_tab=="auto_reply">class="active"</#if>>
+                        <a href="/wechat/msg_setting/auto_reply">自动回复</a>
+                    </li>
+                    <li <#if page_tab=="tag">class="active"</#if>>
+                        <a href="/wechat/tag/list">标签管理</a>
+                    </li>
+                    <li <#if page_tab=="user">class="active"</#if>>
+                        <a href="/wechat/user/list">用户管理</a>
+                    </li>
+                    <li <#if page_tab=="kfaccount">class="active"</#if>>
+                        <a href="/wechat/kfaccount/list">客服管理</a>
+                    </li>
+                    <li <#if page_tab=="msg_setting">class="active"</#if>>
+                        <a href="/wechat/msg_setting/list">消息管理</a>
+                    </li>
+                    <li <#if page_tab=="menu">class="active"</#if>>
+                        <a href="#">菜单设置</a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">登录</a></li>
-                    <li><a href="#">注册</a></li>
+                    <li><a href="/login">登录</a></li>
                 </ul>
             </div>
         </div>

@@ -1,5 +1,5 @@
 <#include "../../layout/layout.ftlh"/>
-<@html page_title="消息列表" page_tab="msg_list">
+<@html page_title="消息列表" page_tab="msg_setting">
     <ol class="breadcrumb">
         <li><a href="/">首页</a></li>
         <li><a href="/wechat/msg_setting/list">消息</a></li>

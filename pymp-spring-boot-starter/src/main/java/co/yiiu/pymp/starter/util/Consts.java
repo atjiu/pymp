@@ -19,5 +19,14 @@ public class Consts {
     public static final String BATCH_GET_USER_INFO = "https://api.weixin.qq.com/cgi-bin/user/info/batchget?access_token=%s";
     // 获取Media文件
     public static final String GET_MEDIA = "https://api.weixin.qq.com/cgi-bin/media/get?access_token=%s&media_id=%s";
+    // 客服帐号
+    public static final String KFACCOUNT_ADD = "https://api.weixin.qq.com/customservice/kfaccount/add?access_token=%s";
+    public static final String KFACCOUNT_INVITEWORKER = "https://api.weixin.qq.com/customservice/kfaccount/inviteworker?access_token=%s";
+    public static final String KFACCOUNT_UPDATE = "https://api.weixin.qq.com/customservice/kfaccount/update?access_token=%s";
+    public static final String KFACCOUNT_DELETE = "https://api.weixin.qq.com/customservice/kfaccount/del?access_token=%s";
+    public static final String KFACCOUNT_UPLOADHEADIMG = "https://api.weixin.qq.com/customservice/kfaccount/uploadheadimg?access_token=%s&kf_account=%s";
+    public static final String KFACCOUNT_LIST = "https://api.weixin.qq.com/cgi-bin/customservice/getkflist?access_token=%s";
+    public static final String KFACCOUNT_SEND = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=%s";
+    public static final String KFACCOUNT_TYPING = "https://api.weixin.qq.com/cgi-bin/message/custom/typing?access_token=%s";
 
 }

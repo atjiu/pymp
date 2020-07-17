@@ -1,5 +1,5 @@
 <#include "../../layout/layout.ftlh"/>
-<@html page_title="用户列表" page_tab="user_list">
+<@html page_title="用户列表" page_tab="user">
     <ol class="breadcrumb">
         <li><a href="/">首页</a></li>
         <li><a href="/wechat/user/list">用户</a></li>

@@ -1,5 +1,5 @@
 <#include "../../layout/layout.ftlh"/>
-<@html page_title="关注自动回复" page_tab="tag_list">
+<@html page_title="关注自动回复" page_tab="sub_reply">
     <ol class="breadcrumb">
         <li><a href="/">首页</a></li>
         <li><a href="/wechat/common/setting/sub_reply">关注回复</a></li>
