@@ -12,7 +12,7 @@
         <thead>
         <tr>
             <th>头像</th>
-            <th>客服ID/th>
+            <th>客服ID</th>
             <th>客服名</th>
             <th>客服昵称</th>
             <th>绑定微信号</th>

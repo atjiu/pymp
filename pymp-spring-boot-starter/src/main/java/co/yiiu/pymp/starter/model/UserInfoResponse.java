@@ -1,11 +1,13 @@
 package co.yiiu.pymp.starter.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class UserInfoResponse {
+public class UserInfoResponse extends WechatResponse {
 
     //用户是否订阅该公众号标识，值为0时，代表此用户没有关注该公众号，拉取不到其余信息
     private Integer subscribe;

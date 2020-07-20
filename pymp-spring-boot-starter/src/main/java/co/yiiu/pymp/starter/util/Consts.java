@@ -9,9 +9,13 @@ public class Consts {
     public static final String GET_TAG = "https://api.weixin.qq.com/cgi-bin/tags/get?access_token=%s";
     public static final String UPDATE_TAG = "https://api.weixin.qq.com/cgi-bin/tags/update?access_token=%s";
     public static final String DELETE_TAG = "https://api.weixin.qq.com/cgi-bin/tags/delete?access_token=%s";
+    public static final String BATCHTAGGING = "https://api.weixin.qq.com/cgi-bin/tags/members/batchtagging?access_token=%s";
+    public static final String BATCHUNTAGGING = "https://api.weixin.qq.com/cgi-bin/tags/members/batchuntagging?access_token=%s";
+    public static final String GETTAGIDLIST = "https://api.weixin.qq.com/cgi-bin/tags/getidlist?access_token=%s";
 
     // 获取标签下的所有粉丝
     public static final String GET_TAG_USERS = "https://api.weixin.qq.com/cgi-bin/user/tag/get?access_token=%s";
+    public static final String USER_REMARK = "https://api.weixin.qq.com/cgi-bin/user/info/updateremark?access_token=%s";
 
     // 用户
     public static final String GET_USERS = "https://api.weixin.qq.com/cgi-bin/user/get?access_token=%s&next_openid=%s";

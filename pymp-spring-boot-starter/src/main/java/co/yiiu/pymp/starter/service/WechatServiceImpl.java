@@ -25,7 +25,7 @@ public class WechatServiceImpl implements WechatService {
     @Override
     public TagResponse createTag(String name) {
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
 
         String postJson = "{\"tag\":{\"name\":\"%s\"}}";
         HttpEntity<String> entity = new HttpEntity<>(String.format(postJson, name), headers);
@@ -39,9 +39,9 @@ public class WechatServiceImpl implements WechatService {
     }
 
     @Override
-    public WechatResponse updateTag(Long id, String name) {
+    public WechatResponse updateTag(Integer id, String name) {
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
 
         String postJson = "{\"tag\":{\"id\":%d,\"name\":\"%s\"}}";
         HttpEntity<String> entity = new HttpEntity<>(String.format(postJson, id, name), headers);
@@ -50,14 +50,67 @@ public class WechatServiceImpl implements WechatService {
     }
 
     @Override
-    public WechatResponse deleteTag(Long id) {
+    public WechatResponse deleteTag(Integer id) {
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
 
         String postJson = "{\"tag\":{\"id\":%d}}";
         HttpEntity<String> entity = new HttpEntity<>(String.format(postJson, id), headers);
 
         return restTemplate.postForObject(String.format(Consts.DELETE_TAG, wechatUtil.getAccessToken()), entity, WechatResponse.class);
+    }
+
+    @Override
+    public WechatResponse batchTagging(List<String> openids, Integer tagId) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+
+        String jsonPost = "{\n" +
+                "    \"openid_list\": [%s],\n" +
+                "    \"tagid\": %d\n" +
+                "}";
+
+        StringBuilder s = new StringBuilder();
+        for (String openid : openids) {
+            s.append("\"").append(openid).append("\",");
+        }
+        s = s.deleteCharAt(s.length() - 1);
+
+        HttpEntity<String> entity = new HttpEntity<>(String.format(jsonPost, s.toString(), tagId), headers);
+        return restTemplate.postForObject(String.format(Consts.BATCHTAGGING, wechatUtil.getAccessToken()), entity, WechatResponse.class);
+    }
+
+    @Override
+    public WechatResponse batchUnTagging(List<String> openids, Integer tagId) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+
+        String jsonPost = "{\n" +
+                "    \"openid_list\": [%s],\n" +
+                "    \"tagid\": %d\n" +
+                "}";
+
+        StringBuilder s = new StringBuilder();
+        for (String openid : openids) {
+            s.append("\"").append(openid).append("\",");
+        }
+        s = s.deleteCharAt(s.length() - 1);
+
+        HttpEntity<String> entity = new HttpEntity<>(String.format(jsonPost, s.toString(), tagId), headers);
+        return restTemplate.postForObject(String.format(Consts.BATCHUNTAGGING, wechatUtil.getAccessToken()), entity, WechatResponse.class);
+    }
+
+    @Override
+    public TagIdListResponse getTagIdList(String openid) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+
+        String jsonPost = "{\n" +
+                "    \"openid\": \"%s\"\n" +
+                "} ";
+
+        HttpEntity<String> entity = new HttpEntity<>(String.format(jsonPost, openid), headers);
+        return restTemplate.postForObject(String.format(Consts.GETTAGIDLIST, wechatUtil.getAccessToken()), entity, TagIdListResponse.class);
     }
 
     @Override
@@ -71,9 +124,23 @@ public class WechatServiceImpl implements WechatService {
     }
 
     @Override
+    public WechatResponse updateRemark(String openid, String remark) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+
+        String jsonPost = "{\n" +
+                "    \"openid\": \"%s\",\n" +
+                "    \"remark\": \"%s\"\n" +
+                "}";
+
+        HttpEntity<String> entity = new HttpEntity<>(String.format(jsonPost, openid, remark), headers);
+        return restTemplate.postForObject(String.format(Consts.USER_REMARK, wechatUtil.getAccessToken()), entity, WechatResponse.class);
+    }
+
+    @Override
     public BatchUserResponse batchGetUserInfo(List<String> openids) {
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
 
         StringBuilder sb = new StringBuilder();
         for (String openid : openids) {
@@ -96,7 +163,7 @@ public class WechatServiceImpl implements WechatService {
     @Override
     public WechatResponse kfAccountAdd(String kf_account, String nickname) {
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
 
         String postJson = "{\n" +
                 "    \"kf_account\": \"%s\",\n" +
@@ -111,7 +178,7 @@ public class WechatServiceImpl implements WechatService {
     @Override
     public WechatResponse kfAccountInviteWorker(String kf_account, String invite_wx) {
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
 
         String postJson = "{\n" +
                 "    \"kf_account\": \"%s\",\n" +
@@ -126,7 +193,7 @@ public class WechatServiceImpl implements WechatService {
     @Override
     public WechatResponse kfAccountUpdate(String kf_account, String nickname) {
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
 
         String postJson = "{\n" +
                 "    \"kf_account\": \"%s\",\n" +
@@ -141,7 +208,7 @@ public class WechatServiceImpl implements WechatService {
     @Override
     public WechatResponse kfAccountDelete(String kf_account) {
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
 
         String postJson = "{\n" +
                 "    \"kf_account\": \"%s\"" +
@@ -180,7 +247,7 @@ public class WechatServiceImpl implements WechatService {
     @Override
     public WechatResponse kfAccountSendMsg(String openid, String msgtype, String txt) {
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
 
         String postJson = "{\n" +
                 "    \"touser\": \"%s\",\n" +

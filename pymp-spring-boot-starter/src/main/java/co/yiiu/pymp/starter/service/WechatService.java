@@ -13,16 +13,28 @@ public interface WechatService {
     TagResponse getTag();
 
     //更新标签
-    WechatResponse updateTag(Long id, String name);
+    WechatResponse updateTag(Integer id, String name);
 
     //删除标签
-    WechatResponse deleteTag(Long id);
+    WechatResponse deleteTag(Integer id);
+
+    //批量添加标签
+    WechatResponse batchTagging(List<String> openids, Integer tagId);
+
+    //批量取消标签
+    WechatResponse batchUnTagging(List<String> openids, Integer tagId);
+
+    //获取用户身上的标签列表
+    TagIdListResponse getTagIdList(String openid);
 
     //获取关注的用户列表
     UserResponse getUser(String next_openid);
 
     //获取用户信息
     UserInfoResponse getUserInfo(String openid);
+
+    //设置用户备注
+    WechatResponse updateRemark(String openid, String remark);
 
     //批量获取用户信息
     BatchUserResponse batchGetUserInfo(List<String> openids);

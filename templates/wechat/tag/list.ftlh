@@ -38,7 +38,7 @@
             if (new_name) {
                 $.post("/wechat/tag/update", {
                     id: id,
-                    name: new_name,
+                    name: encodeURIComponent(new_name),
                 }).done(function () {
                     layer.msg('修改成功', {time: 1500}, function () {
                         location.reload();
@@ -53,7 +53,7 @@
             var new_name = window.prompt("请输入标签名");
             if (new_name) {
                 $.post("/wechat/tag/create", {
-                    name: new_name,
+                    name: encodeURIComponent(new_name),
                 }).done(function () {
                     layer.msg('创建成功', {time: 1500}, function () {
                         location.reload();

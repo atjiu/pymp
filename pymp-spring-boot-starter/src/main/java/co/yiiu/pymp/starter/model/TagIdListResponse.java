@@ -7,7 +7,7 @@ import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class BatchUserResponse extends WechatResponse {
+public class TagIdListResponse extends WechatResponse {
 
-    List<UserInfoResponse> user_info_list;
+    private List<Integer> tagid_list;
 }
