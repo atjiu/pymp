@@ -38,7 +38,7 @@
                         <a href="/wechat/msg_setting/list">消息管理</a>
                     </li>
                     <li <#if page_tab=="menu">class="active"</#if>>
-                        <a href="#">菜单设置</a>
+                        <a href="/wechat/menu/config">菜单设置</a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

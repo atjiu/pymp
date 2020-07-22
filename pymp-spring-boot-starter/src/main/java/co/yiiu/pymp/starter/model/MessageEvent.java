@@ -4,6 +4,7 @@ public enum MessageEvent {
 
     unsubscribe,
     subscribe,
+    click,
     ;
 
 }

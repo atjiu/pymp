@@ -74,5 +74,24 @@ public interface WechatService {
      */
     WechatResponse kfAccountSendMsg(String openid, String msgtype, String txt);
 
-    WechatResponse kfAccountTyping(String openid);
+    // ------------------------菜单-------------------------------------
+
+    //查询当前设置的菜单
+    String menuInfo();
+
+    //创建菜单
+    WechatResponse menuCreate(String menuJson);
+
+    WechatResponse menuDelete();
+
+    //个性化菜单创建
+    WechatResponse menuAddConditional(String menuJson);
+
+    WechatResponse menuDelConditional(String menuid);
+
+    //测试个性化菜单匹配结果
+    //user_id可以是粉丝的OpenID，也可以是粉丝的微信号。
+    String menuTryMatch(String userid);
+
+    // ------------------------菜单-------------------------------------
 }

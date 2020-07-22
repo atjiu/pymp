@@ -31,6 +31,19 @@ public class Consts {
     public static final String KFACCOUNT_UPLOADHEADIMG = "https://api.weixin.qq.com/customservice/kfaccount/uploadheadimg?access_token=%s&kf_account=%s";
     public static final String KFACCOUNT_LIST = "https://api.weixin.qq.com/cgi-bin/customservice/getkflist?access_token=%s";
     public static final String KFACCOUNT_SEND = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=%s";
-    public static final String KFACCOUNT_TYPING = "https://api.weixin.qq.com/cgi-bin/message/custom/typing?access_token=%s";
+
+    // 菜单
+    public static final String MENU_CREATE = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=%s";
+    //查询接口
+    public static final String MENU_GET_CURRENT_SELFMENU_INFO = "https://api.weixin.qq.com/cgi-bin/get_current_selfmenu_info?access_token=%s";
+    public static final String MENU_DELETE = "https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=%s";
+    //创建个性化菜单
+    public static final String MENU_ADDCONDITIONAL = "https://api.weixin.qq.com/cgi-bin/menu/addconditional?access_token=%s";
+    //删除个性化菜单
+    public static final String MENU_DELCONDITIONAL = "https://api.weixin.qq.com/cgi-bin/menu/delconditional?access_token=%s";
+    //测试个性化菜单匹配结果
+    public static final String MENU_TRYMATCH = "https://api.weixin.qq.com/cgi-bin/menu/trymatch?access_token=%s";
+    //获取自定义菜单配置
+    public static final String MENU_GET = "https://api.weixin.qq.com/cgi-bin/menu/get?access_token=%s";
 
 }

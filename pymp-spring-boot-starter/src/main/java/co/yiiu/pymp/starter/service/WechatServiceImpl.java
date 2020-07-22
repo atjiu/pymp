@@ -12,6 +12,8 @@ import org.springframework.web.client.RestTemplate;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.UUID;
 
@@ -263,7 +265,61 @@ public class WechatServiceImpl implements WechatService {
     }
 
     @Override
-    public WechatResponse kfAccountTyping(String openid) {
-        return null;
+    public String menuInfo() {
+        try {
+            String forObject = restTemplate.getForObject(String.format(Consts.MENU_GET_CURRENT_SELFMENU_INFO, wechatUtil.getAccessToken()), String.class);
+            return forObject == null ? null : new String(forObject.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8.name());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public WechatResponse menuCreate(String menuJson) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+
+        HttpEntity<String> entity = new HttpEntity<>(menuJson, headers);
+
+        return restTemplate.postForObject(String.format(Consts.MENU_CREATE, wechatUtil.getAccessToken()), entity, WechatResponse.class);
+    }
+
+    @Override
+    public WechatResponse menuDelete() {
+        return restTemplate.getForObject(String.format(Consts.MENU_DELETE, wechatUtil.getAccessToken()), WechatResponse.class);
+    }
+
+    @Override
+    public MenuAddConditionalResponse menuAddConditional(String menuJson) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+
+        HttpEntity<String> entity = new HttpEntity<>(menuJson, headers);
+
+        return restTemplate.postForObject(String.format(Consts.MENU_ADDCONDITIONAL, wechatUtil.getAccessToken()), entity, MenuAddConditionalResponse.class);
+    }
+
+    @Override
+    public WechatResponse menuDelConditional(String menuid) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+
+        String postJson = "{\"menuid\":\"%s\"}";
+        HttpEntity<String> entity = new HttpEntity<>(String.format(postJson, menuid), headers);
+
+        return restTemplate.postForObject(String.format(Consts.MENU_DELCONDITIONAL, wechatUtil.getAccessToken()), entity, WechatResponse.class);
+    }
+
+    @Override
+    public String menuTryMatch(String userid) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+
+        String postJson = "{\"user_id\":\"%s\"}";
+        HttpEntity<String> entity = new HttpEntity<>(String.format(postJson, userid), headers);
+
+        return restTemplate.postForObject(String.format(Consts.MENU_DELCONDITIONAL, wechatUtil.getAccessToken()), entity, String.class);
+
     }
 }

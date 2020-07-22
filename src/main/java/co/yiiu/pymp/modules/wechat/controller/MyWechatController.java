@@ -64,7 +64,7 @@ public class MyWechatController {
             _m.setCreateTime(new Date(message.getCreateTime() * 1000));
             messageService.save(_m);
 
-            if (message.getMsgType().equals(MessageType.text.name())) {
+            if (message.getMsgType().equalsIgnoreCase(MessageType.text.name())) {
                 Message msg = new Message();
                 msg.setToUserName(message.getFromUserName());
                 msg.setFromUserName(message.getToUserName());
@@ -85,7 +85,7 @@ public class MyWechatController {
                         return XML2BeanUtil.convertToXml(msg);
                     }
                 }
-            } else if (message.getMsgType().equals(MessageType.voice.name())) {
+            } else if (message.getMsgType().equalsIgnoreCase(MessageType.voice.name())) {
                 ResponseEntity<byte[]> media = wechatService.getMedia(message.getMediaId());
                 File file = new File("./static/media/");
                 if (!file.exists()) file.mkdirs();
@@ -97,9 +97,9 @@ public class MyWechatController {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            } else if (message.getMsgType().equals(MessageType.location.name())) {
+            } else if (message.getMsgType().equalsIgnoreCase(MessageType.location.name())) {
 
-            } else if (message.getMsgType().equals(MessageType.video.name())) {
+            } else if (message.getMsgType().equalsIgnoreCase(MessageType.video.name())) {
                 ResponseEntity<byte[]> media = wechatService.getMedia(message.getMediaId());
                 File file = new File("./static/media/");
                 if (!file.exists()) file.mkdirs();
@@ -108,7 +108,7 @@ public class MyWechatController {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            } else if (message.getMsgType().equals(MessageType.shortvideo.name())) {
+            } else if (message.getMsgType().equalsIgnoreCase(MessageType.shortvideo.name())) {
                 ResponseEntity<byte[]> media = wechatService.getMedia(message.getMediaId());
                 File file = new File("./static/media/");
                 if (!file.exists()) file.mkdirs();
@@ -117,12 +117,12 @@ public class MyWechatController {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            } else if (message.getMsgType().equals(MessageType.image.name())) {
+            } else if (message.getMsgType().equalsIgnoreCase(MessageType.image.name())) {
 
-            } else if (message.getMsgType().equals(MessageType.link.name())) {
+            } else if (message.getMsgType().equalsIgnoreCase(MessageType.link.name())) {
 
-            } else if (message.getMsgType().equals(MessageType.event.name())) {
-                if (message.getEvent().equals(MessageEvent.subscribe.name())) {
+            } else if (message.getMsgType().equalsIgnoreCase(MessageType.event.name())) {
+                if (message.getEvent().equalsIgnoreCase(MessageEvent.subscribe.name())) {
                     CommonSetting commonSetting = commonSettingService.findByType(CommonSettingType.SUB_REPLY.name());
                     if (commonSetting != null && !StringUtils.isEmpty(commonSetting.getContent())) {
                         Message msg = new Message();
@@ -139,8 +139,16 @@ public class MyWechatController {
                     user.setFromUserName(message.getFromUserName());
                     user.setStatus(UserStatus.subscribe.name());
                     userRepository.save(user);
-                } else if (message.getEvent().equals(MessageEvent.unsubscribe.name())) {
+                } else if (message.getEvent().equalsIgnoreCase(MessageEvent.unsubscribe.name())) {
                     log.info("有人取关了公众号, msg: {}", message.toString());
+                } else if (message.getEvent().equalsIgnoreCase(MessageEvent.click.name())) {
+                    Message msg = new Message();
+                    msg.setToUserName(message.getFromUserName());
+                    msg.setFromUserName(message.getToUserName());
+                    msg.setMsgType(MessageType.text.name());
+                    msg.setCreateTime(System.currentTimeMillis());
+                    msg.setContent("这是一条从菜单触发click事件eventKey:" + message.getEventKey() + " 的消息");
+                    return XML2BeanUtil.convertToXml(msg);
                 }
             } else {
                 log.warn("没有找到匹配的消息类型，msg: {}", message.toString());
